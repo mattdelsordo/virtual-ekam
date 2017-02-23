@@ -1,4 +1,6 @@
 /*
+ * Matt DelSordo
+ * 2/23/17
  * simulates my boy ekam
  */
 
@@ -11,8 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
-public class Ekam extends JFrame implements ActionListener
-{
+public class Ekam extends JFrame{
 	private JButton btnEkamsHead;
 	private JLabel lblBitches;
 	private HashTable asoiafReference;
@@ -55,13 +56,22 @@ public class Ekam extends JFrame implements ActionListener
 		this.setIconImage(ekam);
 		
 		btnEkamsHead = new JButton(new ImageIcon(ekam));
-		btnEkamsHead.addActionListener(this);
+		btnEkamsHead.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				bitches();
+			}
+			
+		});
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(btnEkamsHead, c);
 		this.getRootPane().setDefaultButton(btnEkamsHead);
 		
 		lblBitches = new JLabel(asoiafReference.randomEntry() + ", bitches.");
+		lblBitches.setFont(new Font("Arial", Font.PLAIN, 16));
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(lblBitches, c);
@@ -72,14 +82,7 @@ public class Ekam extends JFrame implements ActionListener
 		
 	}
 	
-	public void actionPerformed(ActionEvent ae)
-	{
-		if (btnEkamsHead == ae.getSource())
-		{
-			bitches();
-		}
-	}
-	
+	//performs actions on button click
 	private void bitches()
 	{
 		lblBitches.setText(asoiafReference.randomEntry() + ", bitches.");
@@ -96,5 +99,7 @@ public class Ekam extends JFrame implements ActionListener
 			System.out.println("Error reading audio file.");
 			System.exit(1);
 		}
+		
+		pack();
 	}
 }
